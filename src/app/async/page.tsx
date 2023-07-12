@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react'
-
-const url = 'http://localhost:3001/api/analytics'
+import { useRouter } from 'next/router';
 
 function Page() {
     const onClick = async (e) => {
+        const url = "http://localhost:3000/api/analytics"
         const response = await fetch(url, { method: 'POST'})
         console.log(response)
     }
