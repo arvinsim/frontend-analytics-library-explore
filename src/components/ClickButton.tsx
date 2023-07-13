@@ -7,7 +7,7 @@ type ClickButtonProps = {
 
 function ClickButton(props: ClickButtonProps) {
     return <div>
-        <button onClick={props.onClick} className='rounded-full bg-cyan-500 text-white'>
+        <button onClick={props.onClick} className='rounded-full p-2 bg-cyan-500 text-white'>
             {props.loading ? 'Loading...' : 'Click here to send click event!'}
         </button>
     </div>
