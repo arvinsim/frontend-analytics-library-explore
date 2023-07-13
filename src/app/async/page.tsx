@@ -4,9 +4,10 @@ import React from 'react'
 import { useRouter } from 'next/router';
 
 function Page() {
-    const onClick = async (e) => {
+    const onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const url = "http://localhost:3000/api/analytics"
         const response = await fetch(url, { method: 'POST'})
+        console.log(e)
         console.log(response)
     }
 
