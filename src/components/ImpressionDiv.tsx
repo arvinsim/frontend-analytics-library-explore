@@ -12,11 +12,12 @@ export function ImpressionDiv(props: ImpressionDivProps) {
 
     const sendAnalytics = async () => {
       await fetch(url, { method: "POST" });
-      console.log("analytics sent");
+      console.log("analytics via POST sent");
     };
 
     function sendAnalyticsViaImg() {
       new Image().src = url;
+      console.log("analytics via img sent");
     }
 
     if (props.useImg) {
