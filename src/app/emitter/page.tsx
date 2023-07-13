@@ -1,18 +1,38 @@
 'use client';
 
 import React from 'react'
+import { EventEmitter } from 'events';
+import { ClickButton } from '@/components/ClickButton';
+
+class TestAnalytics extends EventEmitter {
+    constructor() {
+        super();
+    }
+}
+
+const analytics = new TestAnalytics();
 
 function Page() {
+    const [loading, setLoading] = React.useState(false);
 
-    const onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    React.useEffect(() => {
+        analytics.on('onClick', async () => {
+            const url = "http://localhost:3001/api/analytics"
+            const response = await fetch(url, { method: 'POST'})
+            console.log(response)
+        })
+    })
+
+    const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        setLoading(true)
+        analytics.emit('onClick');
+        setLoading(false)
     }
 
     return (
         <div>
-        <h1>Async Page</h1>
-        <div>
-            <button onClick={onClick} className='rounded-full bg-cyan-500 text-white'>Click here to send click event!</button>
-        </div>
+        <h1 className='text-xl'>Emitter Page</h1>
+            <ClickButton loading={loading} onClick={onClick} />
         </div>
     )
 }

@@ -2,21 +2,21 @@
 
 import React from 'react'
 import { useRouter } from 'next/router';
+import { ClickButton } from '@/components/ClickButton';
 
 function Page() {
+    const [loading, setLoading] = React.useState(false);
+
     const onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const url = "http://localhost:3000/api/analytics"
+        const url = "http://localhost:3001/api/analytics"
         const response = await fetch(url, { method: 'POST'})
-        console.log(e)
         console.log(response)
     }
 
     return (
         <div>
-        <h1>Async Page</h1>
-        <div>
-            <button onClick={onClick} className='rounded-full bg-cyan-500 text-white'>Click here to send click event!</button>
-        </div>
+        <h1 className='text-xl'>Async Page</h1>
+        <ClickButton loading={loading} onClick={onClick} />
         </div>
     )
 }
